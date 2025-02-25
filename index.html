@@ -20,23 +20,36 @@
         .toggle-btn { position: fixed; top: 20px; left: 20px; z-index: 1000; }
         .controls label, .controls input, .controls select { display: block; margin-bottom: 10px; }
         .slider { width: 100%; }
+        .slider-value { width: 20%; }
         #show-toolbar { position: fixed; top: 20px; left: 20px; z-index: 1000; display: none; }
+        #generate-hidden { position: fixed; top: 20px; left: 84px; z-index: 1000; display: none; }
+        #save-hidden { position: fixed; top: 20px; left: 148px; z-index: 1000; display: none; }
+        .slider-wrap { display: flex; flex-direction: row; gap: 12px }
     </style>
 </head>
 <body>
     <button id="toggle-toolbar" class="toggle-btn mdl-button mdl-js-button mdl-button--fab mdl-button--colored">✖</button>
-    <button id="show-toolbar" class="toggle-btn mdl-button mdl-js-button mdl-button--fab mdl-button--colored">▶</button>
+    <button id="show-toolbar" class="toggle-btn mdl-button mdl-js-button mdl-button--fab mdl-button--colored">≡</button>
+    <button id="generate-hidden" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">▶</button>
+    <button id="save-hidden" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">💾</button>
     
     <div id="toolbar" class="toolbar">
+        <br>
+        <br>
         <h4>Image Scatter Generator</h4>
         <div class="controls">
             <label>Select Image</label>
             <input type="file" id="fileInput" accept="image/*">
             <label>Particle Size</label>
-            <input type="number" id="particleSize" value="10" min="1" max="100">
+            <div class="slider-wrap">
+                <input type="range" id="particleSize" class="slider" value="25" min="1" max="500" oninput="document.getElementById('particleSizeValue').value = this.value">
+                <input type="number" id="particleSizeValue" class="slider-value" value="25" min="1" max="500" oninput="document.getElementById('particleSize').value = this.value">
+            </div>
             <label>Particle Amount</label>
-            <input type="range" id="particleAmount" class="slider" value="500" min="1" max="1000" oninput="document.getElementById('particleAmountValue').value = this.value">
-            <input type="number" id="particleAmountValue" value="500" min="1" max="1000" oninput="document.getElementById('particleAmount').value = this.value">
+            <div class="slider-wrap">
+                <input type="range" id="particleAmount" class="slider" value="10" min="1" max="250" oninput="document.getElementById('particleAmountValue').value = this.value">
+                <input type="number" id="particleAmountValue" class="slider-value" value="10" min="1" max="1000" oninput="document.getElementById('particleAmount').value = this.value">
+            </div>
             <label>Scatter Algorithm</label>
             <select id="scatterType">
                 <option value="random">Random</option>
@@ -68,12 +81,16 @@
             document.getElementById('toolbar').classList.add('hide-toolbar');
             document.getElementById('toggle-toolbar').style.display = 'none';
             document.getElementById('show-toolbar').style.display = 'block';
+            document.getElementById('generate-hidden').style.display = 'block';
+            document.getElementById('save-hidden').style.display = 'block';
         });
         
         document.getElementById('show-toolbar').addEventListener('click', () => {
             document.getElementById('toolbar').classList.remove('hide-toolbar');
             document.getElementById('toggle-toolbar').style.display = 'block';
             document.getElementById('show-toolbar').style.display = 'none';
+            document.getElementById('generate-hidden').style.display = 'none';
+            document.getElementById('save-hidden').style.display = 'none';
         });
         
         let image = new Image();
@@ -92,7 +109,7 @@
             if (!image.src) return alert('Please select an image first.');
             
             const particleSize = parseInt(document.getElementById('particleSize').value);
-            const particleAmount = parseInt(document.getElementById('particleAmount').value);
+            const particleAmount = parseInt(document.getElementById('particleAmountValue').value);
             const scatterType = document.getElementById('scatterType').value;
 
             let seedInput = document.getElementById('seed').value;
@@ -158,7 +175,7 @@
             const fileInput = document.getElementById('fileInput');
             const fileName = fileInput.files.length > 0 ? fileInput.files[0].name.replace(/\..+$/, '') : 'image';
             const particleSize = document.getElementById('particleSize').value;
-            const particleAmount = document.getElementById('particleAmount').value;
+            const particleAmount = document.getElementById('particleAmountValue').value;
             const seed = document.getElementById('seed').value;
             const scatterType = document.getElementById('scatterType').value
                          
@@ -169,7 +186,9 @@
         }
         
         document.getElementById('generate').addEventListener('click', generateParticles);
+        document.getElementById('generate-hidden').addEventListener('click', generateParticles);
         document.getElementById('save').addEventListener('click', saveImage);
+        document.getElementById('save-hidden').addEventListener('click', saveImage);
     </script>
 </body>
 </html>
