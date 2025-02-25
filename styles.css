@@ -1,0 +1,224 @@
+/* MUI Base Styles */
+:root {
+  --primary: #8bc34a;
+  --primary-dark: #618833;
+  --background: #f5f5f5;
+  --surface: #ffffff;
+  --text-primary: #212121;
+  --text-secondary: #757575;
+  --border: #e0e0e0;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+}
+
+/* Body */
+body {
+  background: var(--background);
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.header-container {
+  display: flex; /* Align items horizontally */
+  justify-content: space-between; /* Ensure space between elements */
+  align-items: center; /* Vertically center the items */
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 320px;
+  height: 100vh;
+  background: var(--surface);
+  padding: 20px;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sidebar h3 {
+  font-size: 20px;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+
+.hide-sidebar {
+  transform: translateX(-110%);
+}
+
+/* Inputs */
+.label {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.input-file {
+  border: none;
+  background: var(--background);
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Sliders */
+.slider-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.slider {
+  flex-grow: 1;
+  appearance: none;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  outline: none;
+  transition: 0.2s;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  cursor: pointer;
+
+  background-color: var(--primary) !important;
+}
+
+.slider:hover {
+  background: var(--primary);
+}
+
+.input-number {
+  width: 50px;
+  padding: 6px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  text-align: center;
+}
+
+/* Select & Text Inputs */
+.select,
+.input-text,
+.input-color {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--surface);
+}
+
+.input-color {
+  height: 8vh;
+}
+
+/* Buttons */
+.btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 8px;
+}
+
+.btn.primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn.primary:hover {
+  background: var(--primary-dark);
+}
+
+.close-btn {
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color: black;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* Hover effect */
+.close-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* X styling */
+.close-btn::before {
+  content: "×"; /* Unicode character for "X" */
+  font-weight: bold;
+}
+
+/* Floating Buttons */
+.fab-container {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px; /* Space between the FABs */
+  z-index: 1000;
+  transition: opacity 0.3s ease; /* Smooth transition for hiding/showing */
+}
+
+/* Floating Action Buttons */
+.fab {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  transition: 0.3s ease-in-out;
+}
+
+/* Hover effect for FABs */
+.fab:hover {
+  background: var(--primary-dark);
+}
+
+/* Hidden class for FAB container (to hide all FABs) */
+.hidden {
+  display: none;
+}
+
+/* Canvas */
+canvas {
+  flex-grow: 1;
+}
